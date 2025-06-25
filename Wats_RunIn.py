@@ -16,8 +16,8 @@ import os
 from config import date_from, date_to
 
 # Constants
-USERNAME = "abdelfattah.fahym@ficosa.com"
-PASSWORD = "7140c9Wv$0O5rdR"
+USERNAME = ""
+PASSWORD = ""
 TEST_REPORT_URL = "https://ficosa.wats.com/dist/#/reporting/test-repair/uut-report"
 JSON_PATH = "station_report.json"
 
