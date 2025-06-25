@@ -26,8 +26,8 @@ def Exp_From_Wats(Dynamic_Yield_Link,label_text):
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(Dynamic_Yield_Link)
     
-    username = "abdelfattah.fahym@ficosa.com"
-    password = "7140c9Wv$0O5rdR"
+    username = ""
+    password = ""
     
 
     from_date = f"{date_from} 00"
