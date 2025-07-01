@@ -152,8 +152,30 @@ def Exp_From_Wats(report_url, label_text):
 
             apply_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Apply filter')]")))
             apply_button.click()
-            time.sleep(20)
 
+            # Wait briefly for potential "Generating report" to appear
+            time.sleep(2)
+
+            try:
+                # Wait up to 10 seconds for the "Generating report" span to appear
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//span[contains(text(), 'Generating report')]"))
+                )
+
+                # Poll until the span disappears
+                while True:
+                    try:
+                        gen_report_element = driver.find_element(By.XPATH, "//span[contains(text(), 'Generating report')]")
+                        if gen_report_element.text.strip() != "Generating report":
+                            break
+                        print("⏳ Still generating report...")
+                        time.sleep(3)
+                    except NoSuchElementException:
+                        break  # The span disappeared
+            except TimeoutException:
+                pass  # "Generating report" never showed up
+
+            # Proceed with extraction
             extract_report_data(driver, wait, station)
 
         # Save to JSON
